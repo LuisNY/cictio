@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+    mysql:
+        image: mysql:latest
+        restart: always
+        ports:
+            - 3306:33060
+        environment:
+            - MYSQL_ROOT_PASSWORD=cictio
+            - MYSQL_USER=cictio_user
+            - MYSQL_PASSWORD=cictio
+            - MYSQL_DATABASE=CictioDb
+        
+        volumes:
+            - cictio-db:/var/lib/mysql
+            - ./ORM/db.sql:/docker-entrypoint-initdb.d/db_schema.sql
+
+        networks:
+            - mysql-network
+
+    algo_trading: 
+        #image: algo-trading
+        build: .
+
+        links:
+            - mysql
+        ports:
+            - 8001:8001
+        depends_on: 
+            - mysql # This service depends on mysql. Start that first.
+        networks:
+            - mysql-network
+
+        stdin_open: true
+        tty: true
+            
+volumes:
+    cictio-db: 
+        driver: local
+
+networks:
+    mysql-network:
+        driver: bridge
