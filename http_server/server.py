@@ -367,6 +367,6 @@ class CictioServer(BaseHTTPRequestHandler):
 
 def getServer():
     
-    return HTTPServer(("localhost", 8080), CictioServer)
+    return HTTPServer(("0.0.0.0", 8081), CictioServer)
     
     

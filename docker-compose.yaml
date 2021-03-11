@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-    mysql:
+    cictio_mysql:
         image: mysql:latest
         restart: always
         ports:
@@ -11,7 +11,7 @@ services:
             - MYSQL_ROOT_PASSWORD=cictio
             - MYSQL_USER=cictio_user
             - MYSQL_PASSWORD=cictio
-            - MYSQL_DATABASE=CictioDb
+            - MYSQL_DATABASE=cictio_db
         
         volumes:
             - cictio-db:/var/lib/mysql
@@ -20,16 +20,16 @@ services:
         networks:
             - mysql-network
 
-    algo_trading: 
-        #image: algo-trading
+    cictio_server: 
+
         build: .
 
         links:
-            - mysql
+            - cictio_mysql
         ports:
-            - 8001:8001
+            - 0.0.0.0:8081:8081
         depends_on: 
-            - mysql # This service depends on mysql. Start that first.
+            - cictio_mysql # This service depends on cictio_mysql. Start that first.
         networks:
             - mysql-network
 
