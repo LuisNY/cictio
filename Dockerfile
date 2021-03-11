@@ -31,4 +31,4 @@ RUN useradd -ms /bin/bash cictio_user
 USER cictio_user
 
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["python3", "main/main.py", "--host=0.0.0.0"]
+CMD ["python3", "main/main.py"]
