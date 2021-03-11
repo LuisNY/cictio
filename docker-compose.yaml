@@ -22,7 +22,8 @@ services:
 
     cictio_server: 
 
-        build: .
+        image: luisny/cictio-server:1.0
+        #build: .
 
         links:
             - cictio_mysql
