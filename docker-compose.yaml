@@ -22,13 +22,13 @@ services:
 
     cictio_server: 
 
-        image: luisny/cictio-server:1.0
-        #build: .
+        #image: luisny/cictio-server:1.0
+        build: .
 
         links:
             - cictio_mysql
         ports:
-            - 0.0.0.0:8081:8081
+            - 0.0.0.0:8080:8081
         depends_on: 
             - cictio_mysql # This service depends on cictio_mysql. Start that first.
         networks:
